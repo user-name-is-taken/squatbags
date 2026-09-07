@@ -16,3 +16,5 @@ Pull the database
 ```
 npx supabase db pull
 ```
+
+- CODING STANDARD https://github.com/BurntSushi/erd

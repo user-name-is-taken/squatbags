@@ -1,0 +1,6 @@
+-- exercises
+--   exercises that a user could perform
+--   For example "shoulder press" or "running"
+--
+-- REFERENCES:
+--   This is a base table and has no references

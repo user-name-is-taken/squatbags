@@ -1,0 +1,8 @@
+-- program_exercises
+--   The exercises that the program contains.
+--   For example "leg day" might have "squats", "calf raises", "hamstring curls"...
+--
+-- REFERENCES:
+--   program_exercises *--1 exercises the exercises in the program
+--   program_exercises *--1 programs the programs that we're defining exercises for
+--

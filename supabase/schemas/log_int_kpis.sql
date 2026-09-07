@@ -1,0 +1,7 @@
+-- log_int_kpis
+--   logs int kpis for a set.
+--   For example the "reps" int_kpi would be recorded against a set. Then in a separate row the "weight" int_kpi would be recorded against a set.
+--
+-- REFERENCES
+--  log_int_kpis *--1 sets defines log's set.
+--  log_int_kpis *--1 int_kpis defines the log's int_kpi
