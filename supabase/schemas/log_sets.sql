@@ -1,7 +1,0 @@
--- log_sets
---   Sets are exercises performed by a user during a workout.
---   Note, log_sets records the exercises but log_int_kpis records the actual measurements for the exercise.
---
--- REFERENCES:
---   log_sets 1--* exercise to record which exercise was performed during the set
---   log_sets *--1 log_workouts to record which workout this set was performed during

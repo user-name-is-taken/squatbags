@@ -1,7 +1,0 @@
--- exercise_int_kpis
---   The default int kpis that should be recorded when performing an exercise.
---   For example "shoulder press" should record "reps" and "weight"
---
--- REFERENCES
---   exercise_int_kpis *--1 exercise the exercises that we're defining kpis for 
---   exercise_int_kpis *--1 int_kpis the default kpis that the exercises generally have

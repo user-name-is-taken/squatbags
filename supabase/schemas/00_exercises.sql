@@ -4,3 +4,9 @@
 --
 -- REFERENCES:
 --   This is a base table and has no references
+
+CREATE TABLE exercises (
+    exercise_id SERIAL PRIMARY KEY,
+    exercise_name varchar (400) NOT NULL,
+    exercise_description text NOT NULL
+);
