@@ -15,6 +15,6 @@
 CREATE TABLE program_exercises_int_kpis (
     program_exercises_id SERIAL PRIMARY KEY,
     programs_id INT REFERENCES programs(programs_id),
-    exercise_id INT REFERENCES exercises(exercise_id),
+    exercises_id INT REFERENCES exercises(exercises_id),
     int_kpis_id INT REFERENCES int_kpis(int_kpis_id)
 );

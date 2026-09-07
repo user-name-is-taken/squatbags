@@ -8,15 +8,13 @@
 
 CREATE TABLE log_sets (
     log_sets_id SERIAL PRIMARY KEY,
-    exercise_id INT REFERENCES exercises(exercise_id) 
+    exercises_id INT REFERENCES exercises(exercises_id) 
         ON DELETE SET NULL 
         ON UPDATE CASCADE,
     log_workouts_id INT REFERENCES log_workouts(log_workouts_id)
         ON DELETE CASCADE
         ON UPDATE CASCADE,
-    log_sets_datetime timestamp without time zone,
-
--- TODO: BRIN index on datetime
+    log_sets_datetime timestamp without time zone
 );
 
 

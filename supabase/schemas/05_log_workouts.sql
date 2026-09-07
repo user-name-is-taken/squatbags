@@ -12,7 +12,7 @@
 
 CREATE TABLE log_workouts (
     log_workouts_id SERIAL PRIMARY KEY,
-    user INT,
+    user_id INT,
     programs_id INT REFERENCES programs(programs_id)
         ON DELETE RESTRICT
         ON UPDATE CASCADE,

@@ -9,7 +9,7 @@
 
 CREATE TABLE exercises_int_kpis (
     exercises_int_kpis_id SERIAL PRIMARY KEY,
-    exercise_id INT REFERENCES exercises(exercise_id)
+    exercises_id INT REFERENCES exercises(exercises_id)
         ON DELETE RESTRICT
         ON UPDATE CASCADE,
     int_kpis_id INT REFERENCES int_kpis(int_kpis_id) -- default int kpis

@@ -21,3 +21,12 @@ npx supabase db pull
 - https://supabase.com/docs/guides/local-development/declarative-database-schemas
 - https://supabase.com/docs/guides/local-development/declarative-database-schemas#schema-migrations
 - https://www.geeksforgeeks.org/postgresql/postgresql-naming-conventions/
+
+```
+npx supabase db start
+
+FILENAME="TODO enter a file name here"
+npx supabase db schema declarative  sync --s \
+    ./schemas/00_exercises.sql,./schemas/01_programs.sql,... \
+  -f "./migrations/$(date -Iseconds)-$FILENAME.sql" --strict-coverage
+```
