@@ -282,51 +282,51 @@ services:
         "postgrest"
       ]
 
-  realtime:
-    # This container name looks inconsistent but is correct because realtime constructs tenant id by parsing the subdomain
-    container_name: realtime-dev.supabase-realtime
-    image: supabase/realtime:v2.134.10
-    restart: unless-stopped
-    depends_on:
-      db:
-        # Disable this if you are using an external Postgres database
-        condition: service_healthy
-    healthcheck:
-      test:
-        [
-          "CMD-SHELL",
-          "curl -sSfL --head -o /dev/null -H \"Authorization: Bearer ${ANON_KEY}\" http://localhost:4000/api/tenants/realtime-dev/health"
-        ]
-      timeout: 5s
-      interval: 30s
-      retries: 3
-      start_period: 10s
-    environment:
-      PORT: 4000
-      DB_HOST: ${POSTGRES_HOST}
-      DB_PORT: ${POSTGRES_PORT}
-      DB_USER: supabase_admin
-      DB_PASSWORD: ${POSTGRES_PASSWORD}
-      DB_NAME: ${POSTGRES_DB}
-      DB_AFTER_CONNECT_QUERY: 'SET search_path TO _realtime'
-      DB_ENC_KEY: ${REALTIME_DB_ENC_KEY:-supabaserealtime}
+      # realtime:
+      #   # This container name looks inconsistent but is correct because realtime constructs tenant id by parsing the subdomain
+      #   container_name: realtime-dev.supabase-realtime
+      #   image: supabase/realtime:v2.134.10
+      #   restart: unless-stopped
+      #   depends_on:
+      #     db:
+      #       # Disable this if you are using an external Postgres database
+      #       condition: service_healthy
+      #   healthcheck:
+      #     test:
+      #       [
+      #         "CMD-SHELL",
+      #         "curl -sSfL --head -o /dev/null -H \"Authorization: Bearer ${ANON_KEY}\" http://localhost:4000/api/tenants/realtime-dev/health"
+      #       ]
+      #     timeout: 5s
+      #     interval: 30s
+      #     retries: 3
+      #     start_period: 10s
+      #   environment:
+      #     PORT: 4000
+      #     DB_HOST: ${POSTGRES_HOST}
+      #     DB_PORT: ${POSTGRES_PORT}
+      #     DB_USER: supabase_admin
+      #     DB_PASSWORD: ${POSTGRES_PASSWORD}
+      #     DB_NAME: ${POSTGRES_DB}
+      #     DB_AFTER_CONNECT_QUERY: 'SET search_path TO _realtime'
+      #     DB_ENC_KEY: ${REALTIME_DB_ENC_KEY:-supabaserealtime}
 
-      # Legacy symmetric HS256 key
-      API_JWT_SECRET: ${JWT_SECRET}
+      #     # Legacy symmetric HS256 key
+      #     API_JWT_SECRET: ${JWT_SECRET}
 
-      # JWKS for token verification (EC public + legacy symmetric).
-      # For Podman, use: API_JWT_JWKS: ${JWT_JWKS}
-      #API_JWT_JWKS: ${JWT_JWKS:-{"keys":[]}}
+      #     # JWKS for token verification (EC public + legacy symmetric).
+      #     # For Podman, use: API_JWT_JWKS: ${JWT_JWKS}
+      #     #API_JWT_JWKS: ${JWT_JWKS:-{"keys":[]}}
 
-      SECRET_KEY_BASE: ${SECRET_KEY_BASE}
-      METRICS_JWT_SECRET: ${JWT_SECRET}
-      ERL_AFLAGS: -proto_dist inet_tcp
-      DNS_NODES: "''"
-      RLIMIT_NOFILE: "10000"
-      APP_NAME: realtime
-      SEED_SELF_HOST: "true"
-      RUN_JANITOR: "true"
-      DISABLE_HEALTHCHECK_LOGGING: "true"
+      #     SECRET_KEY_BASE: ${SECRET_KEY_BASE}
+      #     METRICS_JWT_SECRET: ${JWT_SECRET}
+      #     ERL_AFLAGS: -proto_dist inet_tcp
+      #     DNS_NODES: "''"
+      #     RLIMIT_NOFILE: "10000"
+      #     APP_NAME: realtime
+      #     SEED_SELF_HOST: "true"
+      #     RUN_JANITOR: "true"
+      #     DISABLE_HEALTHCHECK_LOGGING: "true"
 
   # To use S3 backed storage: docker compose -f docker-compose.yml -f docker-compose.s3.yml up
   storage:
@@ -339,8 +339,8 @@ services:
         condition: service_healthy
       rest:
         condition: service_started
-      imgproxy:
-        condition: service_started
+          # imgproxy:
+          #   condition: service_started
     healthcheck:
       test:
         [
@@ -392,28 +392,28 @@ services:
     volumes:
       - ./volumes/storage:/var/lib/storage:z
 
-  imgproxy:
-    container_name: supabase-imgproxy
-    image: darthsim/imgproxy:v3.31.4
-    restart: unless-stopped
-    volumes:
-      - ./volumes/storage:/var/lib/storage:z
-    healthcheck:
-      test:
-        [
-          "CMD",
-          "imgproxy",
-          "health"
-        ]
-      timeout: 5s
-      interval: 5s
-      retries: 3
-    environment:
-      IMGPROXY_BIND: ":5001"
-      IMGPROXY_LOCAL_FILESYSTEM_ROOT: /
-      IMGPROXY_USE_ETAG: "true"
-      IMGPROXY_AUTO_WEBP: ${IMGPROXY_AUTO_WEBP}
-      IMGPROXY_MAX_SRC_RESOLUTION: 16.8
+        # imgproxy:
+        #   container_name: supabase-imgproxy
+        #   image: darthsim/imgproxy:v3.31.4
+        #   restart: unless-stopped
+        #   volumes:
+        #     - ./volumes/storage:/var/lib/storage:z
+        #   healthcheck:
+        #     test:
+        #       [
+        #         "CMD",
+        #         "imgproxy",
+        #         "health"
+        #       ]
+        #     timeout: 5s
+        #     interval: 5s
+        #     retries: 3
+        #   environment:
+        #     IMGPROXY_BIND: ":5001"
+        #     IMGPROXY_LOCAL_FILESYSTEM_ROOT: /
+        #     IMGPROXY_USE_ETAG: "true"
+        #     IMGPROXY_AUTO_WEBP: ${IMGPROXY_AUTO_WEBP}
+        #     IMGPROXY_MAX_SRC_RESOLUTION: 16.8
 
   meta:
     container_name: supabase-meta
@@ -432,45 +432,45 @@ services:
       PG_META_DB_PASSWORD: ${POSTGRES_PASSWORD}
       CRYPTO_KEY: ${PG_META_CRYPTO_KEY}
 
-  functions:
-    container_name: supabase-edge-functions
-    image: supabase/edge-runtime:v1.76.2
-    restart: unless-stopped
-    volumes:
-      - ./volumes/functions:/home/deno/functions:z
-      - deno-cache:/root/.cache/deno
-    depends_on:
-      api-gw:
-        condition: service_healthy
-    healthcheck:
-      test: ["CMD-SHELL", "timeout 1 bash -c '</dev/tcp/127.0.0.1/9000'"]
-      interval: 5s
-      timeout: 5s
-      retries: 3
-    environment:
-      # Legacy symmetric HS256 key
-      JWT_SECRET: ${JWT_SECRET}
-      # JWKS for token verification (EC public + legacy symmetric).
-      # For Podman, use: SUPABASE_JWKS: ${JWT_JWKS}
-      #SUPABASE_JWKS: ${JWT_JWKS:-{"keys":[]}}
+        # functions:
+        #   container_name: supabase-edge-functions
+        #   image: supabase/edge-runtime:v1.76.2
+        #   restart: unless-stopped
+        #   volumes:
+        #     - ./volumes/functions:/home/deno/functions:z
+        #     - deno-cache:/root/.cache/deno
+        #   depends_on:
+        #     api-gw:
+        #       condition: service_healthy
+        #   healthcheck:
+        #     test: ["CMD-SHELL", "timeout 1 bash -c '</dev/tcp/127.0.0.1/9000'"]
+        #     interval: 5s
+        #     timeout: 5s
+        #     retries: 3
+        #   environment:
+        #     # Legacy symmetric HS256 key
+        #     JWT_SECRET: ${JWT_SECRET}
+        #     # JWKS for token verification (EC public + legacy symmetric).
+        #     # For Podman, use: SUPABASE_JWKS: ${JWT_JWKS}
+        #     #SUPABASE_JWKS: ${JWT_JWKS:-{"keys":[]}}
 
-      SUPABASE_URL: http://api-gw:8000
-      SUPABASE_PUBLIC_URL: ${SUPABASE_PUBLIC_URL}
-      # Legacy API keys (HS256-signed JWTs)
-      SUPABASE_ANON_KEY: ${ANON_KEY}
-      SUPABASE_SERVICE_ROLE_KEY: ${SERVICE_ROLE_KEY}
-      # New opaque API keys
-      SUPABASE_PUBLISHABLE_KEYS: "{\"default\":\"${SUPABASE_PUBLISHABLE_KEY:-}\"}"
-      SUPABASE_SECRET_KEYS: "{\"default\":\"${SUPABASE_SECRET_KEY:-}\"}"
-      SUPABASE_DB_URL: postgresql://postgres:${POSTGRES_PASSWORD}@${POSTGRES_HOST}:${POSTGRES_PORT}/${POSTGRES_DB}
-      # TODO: Allow configuring VERIFY_JWT per function.
-      VERIFY_JWT: "${FUNCTIONS_VERIFY_JWT}"
-    command:
-      [
-        "start",
-        "--main-service",
-        "/home/deno/functions/main"
-      ]
+        #     SUPABASE_URL: http://api-gw:8000
+        #     SUPABASE_PUBLIC_URL: ${SUPABASE_PUBLIC_URL}
+        #     # Legacy API keys (HS256-signed JWTs)
+        #     SUPABASE_ANON_KEY: ${ANON_KEY}
+        #     SUPABASE_SERVICE_ROLE_KEY: ${SERVICE_ROLE_KEY}
+        #     # New opaque API keys
+        #     SUPABASE_PUBLISHABLE_KEYS: "{\"default\":\"${SUPABASE_PUBLISHABLE_KEY:-}\"}"
+        #     SUPABASE_SECRET_KEYS: "{\"default\":\"${SUPABASE_SECRET_KEY:-}\"}"
+        #     SUPABASE_DB_URL: postgresql://postgres:${POSTGRES_PASSWORD}@${POSTGRES_HOST}:${POSTGRES_PORT}/${POSTGRES_DB}
+        #     # TODO: Allow configuring VERIFY_JWT per function.
+        #     VERIFY_JWT: "${FUNCTIONS_VERIFY_JWT}"
+        #   command:
+        #     [
+        #       "start",
+        #       "--main-service",
+        #       "/home/deno/functions/main"
+        #     ]
 
   # Comment out everything below this point if you are using an external Postgres database
   db:
