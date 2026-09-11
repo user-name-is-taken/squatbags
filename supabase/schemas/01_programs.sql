@@ -1,8 +1,8 @@
 -- programs
---   A collection of exercises to be performed during a workout.
+--   A collection of workouts to be performed over a period of time (generally months).
 --
 -- REFERENCES
---   Note programs doesn't have any referecnes because it's a base table.   
+--   Note programs doesn't have any references because it's a base table.   
 --
 -- NOTES:
 --   I don't really like "programs" for this
