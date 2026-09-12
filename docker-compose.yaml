@@ -5,15 +5,19 @@ services:
   supabase:
     build:
       context: .
+      # node:26-bookworm-slim has this error. 25 did not.:
+      #    (node:9) [DEP0205] DeprecationWarning: `module.register()` is deprecated. Use `module.registerHooks()` instead.
       dockerfile_inline: |
-        FROM node:26-bookworm-slim
+        FROM node:25-bookworm-slim
         RUN --mount=type=cache,target=/root/.npm npm install -g @supabase/lite
         WORKDIR /app
     working_dir: "/app"
     user: "1000:1000"
-    command: lite init --pglite; lite dev --config /app/lite-config.toml
+    # lite init may be necessary
+    command: sh -c "lite dev --config /app/supabase/lite-config.toml --host"
     ports:
       - "54321:54321"
+      - "54323:54323"
     volumes:
       - .:/app/
       # Use lite db diff to create migrations
