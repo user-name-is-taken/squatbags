@@ -1,3 +1,16 @@
+# Local development quickstart
+
+```
+docker compose up
+```
+
+- supabase lite: https://www.npmjs.com/package/@supabase/lite?activeTab=readme
+  - runs in browser
+  - pglite/sqlite?
+
+- nodejs docker docs: https://docs.docker.com/guides/nodejs/
+- TODO: start a vite frontend. Recommended by lite
+
 # quickstart
 
 supabase logging in (note this uses our project ID):
@@ -30,3 +43,7 @@ npx supabase db schema declarative  sync --s \
     ./schemas/00_exercises.sql,./schemas/01_programs.sql,... \
   -f "./migrations/$(date -Iseconds)-$FILENAME.sql" --strict-coverage
 ```
+
+## Dev environment
+
+- The dev environment is managed by npm.
