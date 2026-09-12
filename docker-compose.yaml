@@ -9,7 +9,7 @@ services:
       #    (node:9) [DEP0205] DeprecationWarning: `module.register()` is deprecated. Use `module.registerHooks()` instead.
       dockerfile_inline: |
         FROM node:25-bookworm-slim
-        RUN --mount=type=cache,target=/root/.npm npm install -g @supabase/lite
+        RUN --mount=type=cache,target=/root/.npm npm install -g @supabase/lite postgres
         WORKDIR /app
     working_dir: "/app"
     user: "1000:1000"

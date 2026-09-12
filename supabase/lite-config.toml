@@ -39,9 +39,11 @@ health_timeout = "2m"
 # The database major version to use. This has to be the same as your remote database's. Run `SHOW
 # server_version;` on the remote database to check.
 major_version = 17
-#driver="postgres"
-#driver="pglite"
-driver="sqlite-postgres"
+# driver="postgres"
+# TODO: The postgres driver needs a postgres instance to connect to. Using pglite for now.
+
+driver="pglite"
+
 
 [db.pooler]
 enabled = false
