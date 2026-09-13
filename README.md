@@ -4,7 +4,7 @@
 docker compose up
 ```
 
-- supabase lite: https://www.npmjs.com/package/@supabase/lite?activeTab=readme
+- !!!supabase lite: https://www.npmjs.com/package/@supabase/lite?activeTab=readme !!!
   - runs in browser
   - pglite/sqlite?
 
@@ -44,6 +44,10 @@ npx supabase db schema declarative  sync --s \
   -f "./migrations/$(date -Iseconds)-$FILENAME.sql" --strict-coverage
 ```
 
-## Dev environment
 
-- The dev environment is managed by npm.
+## SPA Architecture
+
+- https://quasar.dev/quasar-cli-vite/fetching-data/ 
+- supabase tanstack - https://github.com/supabase/tanstack-db
+  - hits postgrest
+- 
