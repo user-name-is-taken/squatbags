@@ -36,3 +36,10 @@ quasar build
 ### Customize the configuration
 
 See [Configuring quasar.config.js](https://v2.quasar.dev/quasar-cli-vite/quasar-config-file).
+
+### How the code works
+
+- Uses file name based routing
+  - https://quasar.dev/quasar-cli-vite/page-routing-with-vue-router#filename-ba
+  - https://router.vuejs.org/file-based-routing/file-based-routing.html
+

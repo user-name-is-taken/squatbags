@@ -1,4 +1,12 @@
 <template>
+  <!--
+    This is a layout. Not an actual page.
+
+    according to https://router.vuejs.org/file-based-routing/file-based-routing.html
+
+     If you create both a src/pages/users/index.vue and a src/pages/users.vue components, the src/pages/users/index.vue will be rendered within the src/pages/users.vue's <RouterView>.
+
+  -->
   <q-layout view="lHh Lpr lFf">
     <q-header elevated>
       <q-toolbar>
@@ -11,9 +19,11 @@
           @click="toggleLeftDrawer"
         />
 
+          <!--
         <q-toolbar-title> Quasar App </q-toolbar-title>
 
         <div>Quasar v{{ $q.version }}</div>
+          -->
       </q-toolbar>
     </q-header>
 
@@ -30,6 +40,9 @@
     </q-drawer>
 
     <q-page-container>
+      <!-- This is where the pages are injected
+        https://quasar.dev/layout/routing-with-layouts-and-pages/#nested-routes
+      -->
       <router-view />
     </q-page-container>
   </q-layout>

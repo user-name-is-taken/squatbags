@@ -24,12 +24,12 @@
   },
   "dependencies": {
     "@quasar/extras": "^2.0.4",
+    "@supabase-labs/tanstack-db": "0.0.1",
+    "@supabase/supabase-js": "2.116.0",
+    "@tanstack/vue-db": "0.1.10",
     "quasar": "^2.32.2",
     "vue": "^3.5.22",
-    "vue-router": "^5.0.6",
-    "@supabase-labs/tanstack-db": "0.0.1",
-    "@tanstack/react-db": "0.3.8",
-    "@supabase/supabase-js": "2.116.0"
+    "vue-router": "^5.0.6"
   },
   "devDependencies": {
     "@quasar/app-vite": "^3.8.3",

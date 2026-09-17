@@ -38,6 +38,7 @@ declare module 'vue-router/auto-routes' {
       Record<never, never>,
       | '//(index)'
       | '//second'
+      | '//third'
     >,
     '//(index)': RouteRecordInfo<
       '//(index)',
@@ -49,6 +50,13 @@ declare module 'vue-router/auto-routes' {
     '//second': RouteRecordInfo<
       '//second',
       '/second',
+      Record<never, never>,
+      Record<never, never>,
+      | never
+    >,
+    '//third': RouteRecordInfo<
+      '//third',
+      '/third',
       Record<never, never>,
       Record<never, never>,
       | never
@@ -78,6 +86,7 @@ declare module 'vue-router/auto-routes' {
         | '/'
         | '//(index)'
         | '//second'
+        | '//third'
       views:
         | 'default'
       pathParamNames:
@@ -94,6 +103,14 @@ declare module 'vue-router/auto-routes' {
     'src/pages/index/second.vue': {
       routes:
         | '//second'
+      views:
+        | never
+      pathParamNames:
+        | never
+    }
+    'src/pages/index/third.vue': {
+      routes:
+        | '//third'
       views:
         | never
       pathParamNames:
