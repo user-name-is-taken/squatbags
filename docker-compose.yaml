@@ -1,4 +1,31 @@
 services:
+  #   pgmain:
+  #     environment: &psqlenv
+  #       POSTGRES_USER: ${POSTGRES_USER:-postgres}
+  #       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-changeme}
+  #       PGDATA: /data/postgres
+  #     hostname: pgmain
+  #     image: postgres:17-bookworm
+  #     # container_name: pgmain_container
+  #     # image: pgmain_image
+  #     # build:
+  #     #   context: "${COMPOSE_DIR:-.}"
+  #     #   dockerfile: pgmain.dockerfile
+  #     #   args:
+  #     #     DB_NAME: pgmain
+  #     # volumes:
+  #     #    - pgmain_vol:/data/postgres
+  #     #    - "${COMPOSE_DIR:-.}/mnt/pgmain:/mnt/pgmain:rw"
+  #     #    - "${COMPOSE_DIR:-.}/mnt/shared:/mnt/shared:rw"
+  #     ports:
+  #       - "5431:5432"
+  #     networks:
+  #       - postgres
+  #     restart: unless-stopped
+  #     # deploy:
+  #     #   resources:
+  #     #     limits:
+  #     #       memory: 100M
   # run interactive with:
   #   docker compose run --rm supabase sh
   supabase:
@@ -13,7 +40,8 @@ services:
     working_dir: "/app"
     user: "1000:1000"
     # lite init may be necessary
-    command: sh -c "lite dev --config /app/supabase/lite-config.toml --admin"
+    #command: sh -c "lite dev --config /app/supabase/lite-config.toml --host --admin"
+    command: sh -c "lite dev --config /app/supabase/lite-config.toml --admin --host"
       #command: sh -c "lite dev --config /app/supabase/lite-config.toml --host --admin"
       #    ports:
       #      - "54321:54321"
@@ -22,6 +50,8 @@ services:
     volumes:
       - .:/app/
       # Use lite db diff to create migrations
+    # depends_on:
+    #   - pgmain
   squatbags:
     build:
       context: .
@@ -33,7 +63,6 @@ services:
     user: "1000:1000"
     # lite init may be necessary
     command: sh -c "npm run dev"
-      #command: sh -c "lite dev --config /app/supabase/lite-config.toml --host --admin"
     ports:
       - "9000:9000"
     # network_mode: host
@@ -41,3 +70,6 @@ services:
       - ./squatbags:/app/
       # Use lite db diff to create migrations
    
+networks:
+  postgres:
+    driver: bridge

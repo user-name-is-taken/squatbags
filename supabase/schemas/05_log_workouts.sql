@@ -17,8 +17,6 @@ CREATE TABLE log_workouts (
         ON DELETE RESTRICT
         ON UPDATE CASCADE,
     log_workouts_datetime timestamp without time zone
-
--- TODO: BRIN index on datetime
 );
 
 
@@ -26,11 +24,11 @@ CREATE INDEX IF NOT EXISTS
     log_workouts_datetime_idx ON log_workouts
     USING BRIN (log_workouts_datetime);
 
-ALTER TABLE public.log_workouts ENABLE ROW LEVEL SECURITY;
+-- ALTER TABLE public.log_workouts ENABLE ROW LEVEL SECURITY;
 
 -- Allow user to update their workouts
-CREATE POLICY user_workouts_rls 
-ON log_workouts 
-FOR UPDATE
-TO authenticated
-WITH CHECK (auth.uid() = user_id);
+-- CREATE POLICY user_workouts_rls 
+-- ON log_workouts 
+-- FOR UPDATE
+-- TO authenticated
+-- WITH CHECK (auth.uid() = user_id);

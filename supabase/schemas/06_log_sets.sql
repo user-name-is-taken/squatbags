@@ -23,9 +23,9 @@ CREATE INDEX IF NOT EXISTS
     log_sets_datetime_idx ON log_sets
     USING BRIN (log_sets_datetime);
 
-ALTER TABLE public.log_sets ENABLE ROW LEVEL SECURITY;
+-- ALTER TABLE public.log_sets ENABLE ROW LEVEL SECURITY;
 
 -- HELPFUL RLS LINK:
 -- https://dev.to/asheeshh/mastering-supabase-rls-row-level-security-as-a-beginner-5175
-CREATE POLICY "User create sets"
-ON 
+-- CREATE POLICY "User create sets"
+-- ON 
