@@ -12,7 +12,7 @@
 
 CREATE TABLE log_workouts (
     log_workouts_id SERIAL PRIMARY KEY,
-    user_id INT,
+    user_id uuid,
     workouts_id INT REFERENCES workouts(workouts_id)
         ON DELETE RESTRICT
         ON UPDATE CASCADE,
@@ -24,11 +24,26 @@ CREATE INDEX IF NOT EXISTS
     log_workouts_datetime_idx ON log_workouts
     USING BRIN (log_workouts_datetime);
 
--- ALTER TABLE public.log_workouts ENABLE ROW LEVEL SECURITY;
+CREATE INDEX IF NOT EXISTS
+    log_workouts_user_id_idx ON log_workouts
+    USING BTREE (user_id);
 
--- Allow user to update their workouts
--- CREATE POLICY user_workouts_rls 
--- ON log_workouts 
--- FOR UPDATE
--- TO authenticated
--- WITH CHECK (auth.uid() = user_id);
+ALTER TABLE public.log_workouts ENABLE ROW LEVEL SECURITY;
+
+REVOKE all ON TABLE public.log_workouts from anon, authenticated;
+
+GRANT SELECT, INSERT ON TABLE public.log_workouts TO authenticated;
+
+-- Allow user to select their workouts
+CREATE POLICY "user_workouts_rls select"
+ON log_workouts 
+FOR SELECT
+TO authenticated
+USING ((SELECT auth.uid()) = user_id);
+
+-- Allow user to INSERT their workouts
+create policy "user_workouts_rls insert"
+on log_workouts
+for insert
+to authenticated
+with check ( (select auth.uid()) = user_id );
