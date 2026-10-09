@@ -1,3 +1,0 @@
--- users
---   The users in the system. Note this is defined through oAuth by supabase.
---   We may not actually need a table for this but it might be useful in the future.
