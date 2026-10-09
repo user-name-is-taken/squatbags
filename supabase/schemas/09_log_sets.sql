@@ -15,7 +15,7 @@ CREATE TABLE log_sets (
     log_workouts_id INT REFERENCES log_workouts(log_workouts_id)
         ON DELETE CASCADE
         ON UPDATE CASCADE,
-    user_id uuid,
+    user_id uuid references auth.users on delete cascade not null,
     log_sets_datetime timestamp without time zone
 );
 
@@ -25,7 +25,7 @@ CREATE INDEX IF NOT EXISTS
     USING BRIN (log_sets_datetime);
 
 CREATE INDEX IF NOT EXISTS
-    log_workouts_user_id_idx ON log_workouts
+    log_sets_user_id_idx ON log_sets
     USING BTREE (user_id);
 
 
