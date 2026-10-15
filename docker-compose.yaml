@@ -1,4 +1,5 @@
 services:
+
   #   pgmain:
   #     environment: &psqlenv
   #       POSTGRES_USER: ${POSTGRES_USER:-postgres}
@@ -31,6 +32,8 @@ services:
   supabase:
     build:
       context: .
+      # Possibly set env: ... TINYGLOBBY_DEBUG=1
+      #
       # node:26-bookworm-slim has this error. 25 did not.:
       #    (node:9) [DEP0205] DeprecationWarning: `module.register()` is deprecated. Use `module.registerHooks()` instead.
       dockerfile_inline: |
